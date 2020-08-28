@@ -19,3 +19,4 @@ library/proguard-rules.pro
 /captures
 .externalNativeBuild
 .cxx
+*.gpg
