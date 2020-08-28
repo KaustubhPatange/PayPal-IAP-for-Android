@@ -13,6 +13,7 @@ library/libs
 library/src
 library/.gitignore
 library/build.gradle
+library/publish.gradle
 library/proguard-rules.pro
 /build
 /captures
