@@ -11,6 +11,7 @@
 /release
 library/libs
 library/src
+library/info.txt
 library/.gitignore
 library/build.gradle
 library/publish.gradle

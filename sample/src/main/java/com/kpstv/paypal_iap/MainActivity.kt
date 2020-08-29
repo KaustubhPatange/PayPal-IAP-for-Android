@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity() {
 
     fun checkout(view: View) {
         paypal.checkout(
-            closeOnCheckout = true, // set this to true if you want to close the window after completing checkout.
+            showCloseDialog = true, // default true
+            showDoNotCloseInfo = true, // default true
+            showProgressBar = true, // default true
+            closeOnCheckout = false, // set this to true if you want to close the window after completing checkout.
             onCheckOutComplete = { details ->
                 /**
                  * This will be called when checkout is complete.
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (paypal.isPurchaseComplete(requestCode, resultCode)) {
             /**
              * Called when whole payment process is completed
@@ -70,6 +74,5 @@ class MainActivity : AppCompatActivity() {
              */
             Toast.makeText(this, "Purchase cancelled", Toast.LENGTH_SHORT).show()
         }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 }
