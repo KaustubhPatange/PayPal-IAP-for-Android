@@ -1,0 +1,1 @@
+> _Remove `include ':library'` line from settings.gradle for the project to compile._
