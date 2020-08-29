@@ -27,9 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     fun checkout(view: View) {
         paypal.checkout(
-            showCloseDialog = true, // default true
-            showDoNotCloseInfo = true, // default true
-            showProgressBar = true, // default true
             closeOnCheckout = false, // set this to true if you want to close the window after completing checkout.
             onCheckOutComplete = { details ->
                 /**

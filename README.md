@@ -1,6 +1,6 @@
 # PayPal IAP for Android
 
-![Maven Central](https://img.shields.io/maven-central/v/io.github.kaustubhpatange/paypal-iap)
+![Maven Central](https://img.shields.io/maven-central/v/io.github.kaustubhpatange/paypal-checkout)
 
 An unofficial PayPal In-App-Purchase library for Android apps. Using this you can easily accept payments within your Android app.
 
@@ -14,7 +14,7 @@ An unofficial PayPal In-App-Purchase library for Android apps. Using this you ca
 
 ### Q. How is this different from the [offical](https://github.com/paypal/PayPal-Android-SDK)?
 
-Well, for starters the repository has no long term support but its ok since it still works. The main problem with direct payments are they don't return `user details` as this library does.
+Well, for starters the official sdk repository has no long term support but its ok since it still works. The main problem with direct payments are, they don't return `purchase details` as this library does.
 
 Also it doesn't accept `credit card` purchase which is possible by using PayPal buttons. [XDA Labs](https://play.google.com/store/apps/details?id=com.xda.labs.play) uses their own implementation of such process.
 
@@ -27,7 +27,7 @@ If you are thinking that I might steal your credential during payment process, t
 Library is available on `mavenCentral()`
 
 ```groovy
-implementation 'io.github.kaustubhpatange:paypal-iap:$version'
+implementation 'io.github.kaustubhpatange:paypal-checkout:$version'
 ```
 
 ## Usage
