@@ -26,26 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkout(view: View) {
-        paypal.checkout(
-            closeOnCheckout = false, // set this to true if you want to close the window after completing checkout.
-            onCheckOutComplete = { details ->
-                /**
-                 * This will be called when checkout is complete.
-                 *
-                 * Note: During this, user might still be in Purchase screen. This means,
-                 * you can't show any form of dialog or overlay from this activity.
-                 *
-                 * User have to manually go at the bottom of the page and click on
-                 * "Return to Merchant" to complete the process. Only after then,
-                 * [Paypal.isPurchaseComplete] will be called.
-                 *
-                 * If you don't want this behaviour and wan't to automatically close the window
-                 * after checkout set [closeOnCheckout] to true. In such case [Paypal.isPurchaseComplete]
-                 * will not called so it is redundant to write it.
-                 */
-                Toast.makeText(this, "Completed with ${details?.email}", Toast.LENGTH_SHORT).show()
-            }
-        )
+        paypal.checkout()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
