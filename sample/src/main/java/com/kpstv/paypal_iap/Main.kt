@@ -1,21 +1,33 @@
+@file:Suppress("DEPRECATION")
 package com.kpstv.paypal_iap
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.kpstv.library.Paypal
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var paypal: Paypal
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.main)
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, MainFragment())
+            .commit()
+    }
+}
+
+class MainFragment : Fragment(R.layout.fragment_main) {
+    private lateinit var paypal: Paypal
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val options = Paypal.Options(
             paypalButtonId = "LE4DPD9LCBG3U",
             purchaseCompleteUrl = "https://kaustubhpatange.github.io/pay",
@@ -23,10 +35,11 @@ class MainActivity : AppCompatActivity() {
         )
         paypal = Paypal.Builder(options)
             .setCallingContext(this)
-    }
 
-    fun checkout(view: View) {
-        paypal.checkout()
+        val button = view.findViewById<Button>(R.id.btn_checkout)
+        button.setOnClickListener {
+            paypal.checkout()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -39,7 +52,7 @@ class MainActivity : AppCompatActivity() {
              * You can also fetch purchase details from [Intent]
              */
             val details = data?.getSerializableExtra(Paypal.PURCHASE_DATA) as? Paypal.History
-            AlertDialog.Builder(this)
+            AlertDialog.Builder(requireContext())
                 .setTitle("Purchase complete")
                 .setMessage("Payment completed successfully for ${details?.email} for Id: ${paypal.options.paypalButtonId}")
                 .setPositiveButton("OK", null)
@@ -50,7 +63,7 @@ class MainActivity : AppCompatActivity() {
              * Called when user cancels the payment or force close the
              *  purchase screen.
              */
-            Toast.makeText(this, "Purchase cancelled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Purchase cancelled", Toast.LENGTH_SHORT).show()
         }
     }
 }
